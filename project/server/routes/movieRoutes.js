@@ -95,13 +95,4 @@ router.get('/movie/:id', async (req, res) => {
 
 
 
-
-
-
-//APi end 
-
-
-// update the movie , delete the movie , get all the movies
-
-
 module.exports = router

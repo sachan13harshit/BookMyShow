@@ -32,15 +32,15 @@ function ProtectedRoute({ children }) {
         {
           label: (
             <span
-            onClick={() => {
-              if (user.role === 'admin') {
-                navigate("/admin");
-              } else if (user.role === 'partner') {
-                navigate("/partner");
-              } else {
-                navigate("/profile");
-              }
-            }}
+              onClick={() => {
+                if (user.role === "admin") {
+                  navigate("/admin");
+                } else if (user.role === "partner") {
+                  navigate("/partner");
+                } else {
+                  navigate("/profile");
+                }
+              }}
             >
               My Profile
             </span>
@@ -69,18 +69,20 @@ function ProtectedRoute({ children }) {
     try {
       dispatch(showLoading());
       const response = await GetCurrentUser();
-      console.log(response)
+      console.log("response", response);
       dispatch(setUser(response.data));
       dispatch(hideLoading());
       // Hide Loader
     } catch (error) {
       dispatch(setUser(null));
-      message.error(error.message);
+      console.log("getValidUser -> error", error);
     }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("Token found", token);
       getValidUser();
     } else {
       navigate("/login");
